@@ -10,7 +10,7 @@ from telegram.ext import (
 
 # -------- CONFIG --------
 BOT_TOKEN = os.getenv("BOT_TOKEN")   # <-- secure way
-ADMIN_ID = int(os.getenv("ADMIN_ID", "7336413554"))  # you can set this in Render too
+ADMIN_ID = int(os.getenv("ADMIN_ID"))  # you can set this in Render too
 PRICE = 20
 CONTENT_LINK = "https://www.mediafire.com/file/4afv87x0m2spvdl/PicsArt-Premium.apk/file"
 DB_PATH = "orders.db"
