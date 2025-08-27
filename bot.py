@@ -135,14 +135,15 @@ async def main():
 if __name__ == "__main__":
     import asyncio
     asyncio.run(init_db())   # only init DB with asyncio
+
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("get", get_app))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, utr_handler))
     app.add_handler(CallbackQueryHandler(button_handler))
+
     logger.info("Bot started")
-    app.run_polling()   # run bot (no asyncio here)
-
-
+    app.run_polling()   # run bot (no asyncio conflict now)
+    
 
 
