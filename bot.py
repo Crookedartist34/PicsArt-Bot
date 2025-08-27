@@ -1,4 +1,10 @@
+import asyncio
+import sys
 
+# Fix for Python 3.11+ (Render uses 3.13)
+if sys.version_info >= (3, 11):
+    asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
+    
 import logging, asyncio, re, os
 import aiosqlite
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -133,8 +139,7 @@ async def main():
     await app.run_polling()
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(init_db())   # only init DB with asyncio
+    asyncio.run(init_db())   # init DB
 
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
@@ -143,7 +148,7 @@ if __name__ == "__main__":
     app.add_handler(CallbackQueryHandler(button_handler))
 
     logger.info("Bot started")
-    app.run_polling()   # run bot (no asyncio conflict now)
+    app.run_polling()
     
 
 
